@@ -1,50 +1,56 @@
 extends Camera3D
 
-@export var ray_count: int = 8000  # Number of rays to cast
-@export var ray_length: float = 100.0  # Max ray length
-@export var highlight_duration: float = 3.0
-@export var block_color: Color = Color(1, 1, 1, 0.8)
+@export var scan_range: float = 900.0
+@export var scan_interval: float = 0.5
+@export var ray_count: int = 200
+@export var ray_length: float = 100.0
+
+func _ready():
+  pass
+  # if not get_parent().is_multiplayer_authority(): return
 
 func _input(event):
-    if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-        create_ray_shower()
+    if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+        perform_environment_scan()
 
-func create_ray_shower():
-    for i in range(ray_count):
-        # Random ray direction
-        var ray_direction = Vector3(
-            randf_range(-1, 1),
-            randf_range(-1, 1),
-            randf_range(-1, 1)
-        ).normalized()
+func perform_environment_scan():
+  # Use camera's forward direction as the base
+  var camera_forward = -global_transform.basis.z
 
-        var ray_origin = global_position
-        var ray_target = ray_origin + ray_direction * ray_length
+  for i in range(ray_count):
+      # Create a cone of rays in front of the camera
+      var ray_direction = camera_forward.rotated(Vector3.UP, randf_range(-PI/4, PI/4))
+      ray_direction = ray_direction.rotated(Vector3.RIGHT, randf_range(-PI/4, PI/4))
+      ray_direction = ray_direction.normalized()
 
-        var space_state = get_world_3d().direct_space_state
-        var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_target)
-        var result = space_state.intersect_ray(query)
+      var ray_origin = global_position
+      var ray_target = ray_origin + ray_direction * ray_length
 
-        if result:
-            create_highlight_block(result.position)
+      var space_state = get_world_3d().direct_space_state
+      var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_target)
+      query.exclude = [get_parent().get_rid()]
+      var result = space_state.intersect_ray(query)
 
-func create_highlight_block(_position: Vector3):
-    var block = MeshInstance3D.new()
-    var mesh = BoxMesh.new()
+      if result:
+          spawn_temporary_cube(result.position)
 
-    mesh.size = Vector3(0.01, 0.01, 0.01)
-    block.mesh = mesh
-    block.position = _position
+func spawn_temporary_cube(position: Vector3):
+    var mesh_instance = MeshInstance3D.new()
+    var cube_mesh = BoxMesh.new()
 
+    # Create material
     var material = StandardMaterial3D.new()
-    material.albedo_color = block_color
-    material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-    material.emission_enabled = true
-    material.emission = block_color
+    material.albedo_color = Color(1, 1, 1, 0.5)  # Random translucent color
 
-    block.material_override = material
-    get_parent().add_child(block)
+    # Configure mesh
+    cube_mesh.size = Vector3(0.1, 0.1, 0.1)  # Small cube
+    mesh_instance.mesh = cube_mesh
+    mesh_instance.material_override = material
 
-    # Remove block after duration
-    await get_tree().create_timer(highlight_duration).timeout
-    block.queue_free()
+    # Position and add to scene
+    get_tree().root.add_child(mesh_instance)
+    mesh_instance.global_transform.origin = position
+
+    # Remove cube after interval
+    await get_tree().create_timer(scan_interval).timeout
+    mesh_instance.queue_free()
