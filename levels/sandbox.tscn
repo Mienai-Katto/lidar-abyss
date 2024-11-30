@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvcb4t0c0nda7"]
+
+[ext_resource type="PackedScene" uid="uid://b6u4fo7p1qjv0" path="res://entities/player/player.tscn" id="1_d5h6h"]
+[ext_resource type="PackedScene" uid="uid://bvrnnus7arvsd" path="res://models/race_track_tire_wall/race_track_tire_wall.tscn" id="2_npny1"]
+
+[node name="Sandbox" type="Node3D"]
+
+[node name="player_entity" parent="." instance=ExtResource("1_d5h6h")]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("2_npny1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34544, 0, -2.14622)
