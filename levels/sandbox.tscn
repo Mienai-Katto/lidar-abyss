@@ -1,8 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvcb4t0c0nda7"]
+[gd_scene load_steps=7 format=3 uid="uid://dvcb4t0c0nda7"]
 
 [ext_resource type="PackedScene" uid="uid://b6u4fo7p1qjv0" path="res://entities/player/player.tscn" id="1_d5h6h"]
 [ext_resource type="Script" path="res://levels/sandbox.gd" id="1_wcdac"]
 [ext_resource type="PackedScene" uid="uid://bvrnnus7arvsd" path="res://models/race_track_tire_wall/race_track_tire_wall.tscn" id="2_npny1"]
+[ext_resource type="Shader" path="res://shaders/sobel.gdshader" id="4_v7tbp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4ang"]
+shader = ExtResource("4_v7tbp")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1po2"]
 albedo_color = Color(0.305882, 1, 0.462745, 1)
@@ -10,8 +14,19 @@ albedo_color = Color(0.305882, 1, 0.462745, 1)
 [node name="Sandbox" type="Node3D"]
 script = ExtResource("1_wcdac")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_l4ang")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("2_npny1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34544, 0, -2.14622)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34544, 1.99707, -2.14622)
 
 [node name="floor" type="CSGBox3D" parent="."]
 material_override = SubResource("StandardMaterial3D_c1po2")
