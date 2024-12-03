@@ -9,5 +9,5 @@ data = PackedVector3Array(2.769, -0.2424, 0.9408, 2.8643, -0.3029, 0.9408, 2.857
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/Collada visual scene group/Tyrewall/Tyrewall-material" index="0"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/Collada visual scene group/Tyrewall/Tyrewall-material/StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/Collada visual scene group/Tyrewall/Tyrewall-material/StaticBody3D" index="0" groups=["red"]]
 shape = SubResource("ConcavePolygonShape3D_06ovn")

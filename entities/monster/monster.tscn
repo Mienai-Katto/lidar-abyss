@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://0iocpiwp0ygg"]
+
+[ext_resource type="Script" path="res://entities/player/manager.gd" id="1_occsa"]
+[ext_resource type="PackedScene" uid="uid://d1rxv5hd1sbrp" path="res://components/camera/player/component.tscn" id="2_ka4wo"]
+[ext_resource type="PackedScene" uid="uid://wnmbpn8knhf7" path="res://components/controller/player/component.tscn" id="3_7rej6"]
+[ext_resource type="PackedScene" uid="uid://blo74ee57pugr" path="res://components/velocity/component.tscn" id="4_rijv8"]
+[ext_resource type="Shader" path="res://shaders/sobel.gdshader" id="5_d21co"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6klx1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_uwy6c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8yfuy"]
+shader = ExtResource("5_d21co")
+
+[node name="monster_entity" type="CharacterBody3D" node_paths=PackedStringArray("velocity_component", "camera_component")]
+input_ray_pickable = false
+script = ExtResource("1_occsa")
+velocity_component = NodePath("velocity")
+camera_component = NodePath("camera")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_6klx1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_uwy6c")
+
+[node name="camera" parent="." instance=ExtResource("2_ka4wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = null
+
+[node name="controller" parent="." node_paths=PackedStringArray("velocity", "camera", "body") instance=ExtResource("3_7rej6")]
+velocity = NodePath("../velocity")
+camera = NodePath("../camera")
+body = NodePath("..")
+
+[node name="velocity" parent="." instance=ExtResource("4_rijv8")]
+
+[node name="Shader" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Shader"]
+material = SubResource("ShaderMaterial_8yfuy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

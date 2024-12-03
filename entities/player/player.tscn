@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6u4fo7p1qjv0"]
+[gd_scene load_steps=8 format=3 uid="uid://b6u4fo7p1qjv0"]
 
 [ext_resource type="Script" path="res://entities/player/manager.gd" id="1_x62rb"]
 [ext_resource type="PackedScene" uid="uid://d1rxv5hd1sbrp" path="res://components/camera/player/component.tscn" id="1_x844l"]
@@ -8,6 +8,14 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6klx1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uwy6c"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a35x5"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="player_entity" type="CharacterBody3D" node_paths=PackedStringArray("velocity_component", "camera_component")]
 input_ray_pickable = false
@@ -32,3 +40,6 @@ camera = NodePath("../camera")
 body = NodePath("..")
 
 [node name="velocity" parent="." instance=ExtResource("3_2tc5j")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_a35x5")

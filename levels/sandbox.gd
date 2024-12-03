@@ -1,6 +1,8 @@
 extends Node3D
 
 const Player = preload("res://entities/player/player.tscn")
+const Monster = preload("res://entities/monster/monster.tscn")
+
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -14,8 +16,7 @@ func _ready() -> void:
 
     print("Server started")
   else:
-    pass
-    # host_game()
+    host_game()
 
 func host_game():
   enet_peer.create_server(PORT)
@@ -26,10 +27,9 @@ func host_game():
 
   create_player(multiplayer.get_unique_id())
 
-
-
 func create_player(peer_id: int):
   var player = Player.instantiate()
+  # var player = Monster.instantiate()
   player.name = str(peer_id)
   spawn_player(player)
   print("Adding player: %s" % player.name)
