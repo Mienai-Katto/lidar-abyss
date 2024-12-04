@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc1hdcrqas08a"]
+
+[ext_resource type="Script" path="res://components/camera/test2/manager.gd" id="1_jpdn5"]
+
+[node name="camera" type="Camera3D"]
+script = ExtResource("1_jpdn5")
