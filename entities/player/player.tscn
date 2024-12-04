@@ -33,6 +33,10 @@ mesh = SubResource("CapsuleMesh_uwy6c")
 
 [node name="camera" parent="." instance=ExtResource("1_x844l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+scan_range = null
+scan_interval = null
+ray_count = null
+ray_length = null
 
 [node name="controller" parent="." node_paths=PackedStringArray("velocity", "camera", "body") instance=ExtResource("2_alql2")]
 velocity = NodePath("../velocity")
