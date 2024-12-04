@@ -9,6 +9,5 @@ scan_interval = null
 ray_count = null
 ray_length = null
 highlight_size = null
-row_delay = null
 sweep_steps_horizontal = null
 sweep_steps_vertical = null
