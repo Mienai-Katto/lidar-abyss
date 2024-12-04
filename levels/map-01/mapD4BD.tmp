@@ -1,5 +1,6 @@
-[gd_scene load_steps=57 format=4 uid="uid://hy6irps2mbha"]
+[gd_scene load_steps=56 format=4 uid="uid://hy6irps2mbha"]
 
+[ext_resource type="Shader" path="res://shaders/sobel.gdshader" id="1_331vi"]
 [ext_resource type="PackedScene" uid="uid://b6u4fo7p1qjv0" path="res://entities/player/player.tscn" id="2_txmbn"]
 [ext_resource type="PackedScene" uid="uid://bvrnnus7arvsd" path="res://models/race_track_tire_wall/race_track_tire_wall.tscn" id="3_qw2bt"]
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="4_jkj4b"]
@@ -37,6 +38,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2orn"]
+shader = ExtResource("1_331vi")
 
 [sub_resource type="Resource" id="Resource_2brst"]
 script = ExtResource("22_56bn2")
@@ -165,23 +169,20 @@ points = PackedVector3Array(-6, 12, -99, -6, 0, -99, -5, 0, -99, -5, 12, -99, -6
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jwr7w"]
 points = PackedVector3Array(-53, 12, -17, -53, 0, -17, -5, 0, -17, -5, 12, -17, -53, 12, -16, -53, 0, -16, -5, 0, -16, -5, 12, -16)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qs53d"]
-sky_top_color = Color(0.0174637, 0.0261258, 0.0416482, 1)
-sky_horizon_color = Color(0.510089, 0.510708, 0.513138, 1)
-ground_bottom_color = Color(0.0228908, 0.0167067, 0.0109028, 1)
-ground_horizon_color = Color(0.510089, 0.510708, 0.513138, 1)
-
-[sub_resource type="Sky" id="Sky_ygfym"]
-sky_material = SubResource("ProceduralSkyMaterial_qs53d")
-
-[sub_resource type="Environment" id="Environment_lxdkj"]
-background_mode = 1
-sky = SubResource("Sky_ygfym")
-tonemap_mode = 2
-glow_enabled = true
-
 [node name="Map-01" type="Node3D"]
 script = SubResource("GDScript_0nnt2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_e2orn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="player_entity" parent="." instance=ExtResource("2_txmbn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45869, 1.83498, -15.3024)
@@ -269,6 +270,3 @@ shape = SubResource("ConvexPolygonShape3D_isr4d")
 
 [node name="entity_0_brush_21_collision_shape" type="CollisionShape3D" parent="QodotMap/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_jwr7w")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_lxdkj")
