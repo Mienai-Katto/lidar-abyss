@@ -43,3 +43,11 @@ replication_config = SubResource("SceneReplicationConfig_a35x5")
 
 [node name="ShaderCamera" parent="." instance=ExtResource("4_r1bni")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+scan_range = null
+scan_interval = null
+ray_count = null
+ray_length = null
+sweep_steps_horizontal = null
+sweep_steps_vertical = null
+point_size = null
+glow_max_distance = null
