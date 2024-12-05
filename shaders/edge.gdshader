@@ -1,9 +1,9 @@
 shader_type spatial;
 render_mode unshaded;
 
-uniform float wave_speed = 2.0;
-uniform float wave_scale = 5.0;
-uniform vec4 wave_color = vec4(0.2, 0.7, 1.0, 0.8);
+uniform float wave_speed = 1.2;
+uniform float wave_scale = 9;
+uniform vec4 wave_color = vec4(0.1, 0.1, 0.1, 0.3);
 
 void fragment() {
     // Create wave pattern based on time and UV
