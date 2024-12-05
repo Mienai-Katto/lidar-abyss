@@ -27,5 +27,5 @@ func _physics_process(_delta):
 
   # if position.y < 0:
   #   position.y = 10
-
-  velocity_component.move(self)
+  pass
+  # velocity_component.move(self)
