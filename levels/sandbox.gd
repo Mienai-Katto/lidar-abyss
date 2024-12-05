@@ -14,9 +14,9 @@ func _ready() -> void:
 		multiplayer.peer_connected.connect(create_player)
 		multiplayer.peer_disconnected.connect(disconnect_player)
 
-    print("Server started")
+	print("Server started")
   else:
-    host_game()
+	host_game()
 
 func host_game():
 	enet_peer.create_server(PORT)
