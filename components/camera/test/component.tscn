@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b20q22csfyupc"]
+
+[ext_resource type="Script" path="res://components/camera/test/manager.gd" id="1_0ckbg"]
+
+[node name="ShaderCamera" type="Camera3D"]
+script = ExtResource("1_0ckbg")

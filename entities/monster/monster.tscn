@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://0iocpiwp0ygg"]
+[gd_scene load_steps=11 format=3 uid="uid://0iocpiwp0ygg"]
 
-[ext_resource type="Script" path="res://entities/player/manager.gd" id="1_occsa"]
+[ext_resource type="Script" path="res://entities/monster/manager.gd" id="1_eq8ke"]
 [ext_resource type="PackedScene" uid="uid://d1rxv5hd1sbrp" path="res://components/camera/player/component.tscn" id="2_ka4wo"]
+[ext_resource type="AudioStream" uid="uid://n8cvvoe6hnbg" path="res://sfx/monster/jumpscare.mp3" id="2_u6nsv"]
 [ext_resource type="PackedScene" uid="uid://wnmbpn8knhf7" path="res://components/controller/player/component.tscn" id="3_7rej6"]
 [ext_resource type="PackedScene" uid="uid://blo74ee57pugr" path="res://components/velocity/component.tscn" id="4_rijv8"]
 [ext_resource type="Shader" path="res://shaders/sobel.gdshader" id="5_d21co"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1orq1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6klx1"]
 
@@ -15,9 +18,16 @@ shader = ExtResource("5_d21co")
 
 [node name="monster_entity" type="CharacterBody3D" node_paths=PackedStringArray("velocity_component", "camera_component")]
 input_ray_pickable = false
-script = ExtResource("1_occsa")
+script = ExtResource("1_eq8ke")
 velocity_component = NodePath("velocity")
 camera_component = NodePath("camera")
+sfx_jumpscare = ExtResource("2_u6nsv")
+
+[node name="enemy_detection" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="enemy_detection"]
+transform = Transform3D(8, 0, 0, 0, 2, 0, 0, 0, 8, 0, 2.1399, 0)
+shape = SubResource("CylinderShape3D_1orq1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -48,3 +58,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[connection signal="body_entered" from="enemy_detection" to="." method="_on_enemy_detection_body_entered"]
