@@ -1,27 +1,23 @@
 shader_type spatial;
 render_mode unshaded, depth_draw_opaque;
 
-uniform float point_size = 5.0;
-uniform vec3 player_position;
-uniform vec3 camera_position;
-uniform float max_distance = 10.0;
-
-varying vec3 world_pos;
+uniform float point_size = 0.01;
+uniform vec3 player_position = vec3(0.0, 0.0, 0.0);
+uniform float max_fade_distance = 10.0;
+uniform float fade_power = 0.1;
 
 void vertex() {
-    // Calculate the world position of the vertex
-    world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-
-    // Calculate distance from the point to the camera
-    float distance_to_camera = distance(world_pos, camera_position);
-
-    // Adjust POINT_SIZE inversely proportional to distance
-    float adjusted_size = point_size / distance_to_camera;
-
-    // Set a minimum and maximum point size to avoid extremes
-    adjusted_size = clamp(adjusted_size, 1.0, 100.0);
-
-    POINT_SIZE = adjusted_size;
+    float distance = length(VERTEX - player_position);
+    
+    float normalized_distance = distance / max_fade_distance;
+    
+    float fade = 1.0 - pow(normalized_distance, fade_power);
+    
+    fade = clamp(fade, 0.0, 1.0);
+    
+    COLOR.a *= fade;
+    
+    POINT_SIZE = point_size;
 }
 
 void fragment() {

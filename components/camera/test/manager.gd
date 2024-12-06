@@ -1,13 +1,12 @@
 extends Camera3D
 
-@export var scan_range: float = 900.0
 @export var scan_interval: float = 8.5
 @export var ray_count: int = 500
 @export var ray_length: float = 100.0
 @export var sweep_steps_horizontal: int = 100
 @export var sweep_steps_vertical: int = 100
-@export var point_size: float = 10.0
-@export var glow_max_distance: float = 10.0
+@export var point_size: float = 2.5
+@export var fade_power: float = 0.15
 
 var point_positions = []
 var point_mesh_instance: MeshInstance3D
@@ -30,7 +29,8 @@ func _ready():
 
 	# Set initial point size
 	point_material.set_shader_parameter("point_size", point_size)
-	point_material.set_shader_parameter("max_distance", glow_max_distance)
+	point_material.set_shader_parameter("max_fade_distance", ray_length)
+	point_material.set_shader_parameter("fade_power", fade_power)
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -49,9 +49,9 @@ func _process(delta):
 	if points_updated:
 		point_positions = point_positions.filter(filter_by_time_left)
 		update_point_mesh()
-
-	point_material.set_shader_parameter("camera_position", global_transform.origin)
-	point_material.set_shader_parameter("player_position", global_transform.origin)
+	
+	# Pass the camera's position to the shader
+	point_material.set_shader_parameter("player_position", global_position)
 
 func filter_by_time_left(p):
 	return p["time_left"] > 0
@@ -89,7 +89,7 @@ func update_point_mesh():
 
 	for point in point_positions:
 		vertices.append(point["position"])
-		var color = Color(1, 0, 0, 1) if point["is_red"] else Color(0.1, 0.1, 0.1, 1)
+		var color = Color(1, 0, 0, 1) if point["is_red"] else Color(1, 1, 1, 1)
 		colors.append(color)
 
 	var arrays = []
