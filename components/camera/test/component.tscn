@@ -4,11 +4,3 @@
 
 [node name="ShaderCamera" type="Camera3D"]
 script = ExtResource("1_0ckbg")
-scan_range = null
-scan_interval = null
-ray_count = null
-ray_length = null
-sweep_steps_horizontal = null
-sweep_steps_vertical = null
-point_size = null
-glow_max_distance = null

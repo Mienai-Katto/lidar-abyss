@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="lidar-abyss"
-run/main_scene="res://levels/map-01/map-01.tscn"
+run/main_scene="res://levels/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Lobby="*res://global/lobby.gd"
 
 [dotnet]
 
@@ -21,7 +25,7 @@ project/assembly_name="lidar-abyss"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray("res://addons/awaitable_http_request/plugin.cfg")
 
 [input]
 

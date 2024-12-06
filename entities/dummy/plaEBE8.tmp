@@ -1,14 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6u4fo7p1qjv0"]
+[gd_scene load_steps=8 format=3 uid="uid://b6u4fo7p1qjv0"]
 
 [ext_resource type="Script" path="res://entities/player/manager.gd" id="1_x62rb"]
+[ext_resource type="PackedScene" uid="uid://d1rxv5hd1sbrp" path="res://components/camera/player/component.tscn" id="1_x844l"]
 [ext_resource type="PackedScene" uid="uid://wnmbpn8knhf7" path="res://components/controller/player/component.tscn" id="2_alql2"]
 [ext_resource type="PackedScene" uid="uid://blo74ee57pugr" path="res://components/velocity/component.tscn" id="3_2tc5j"]
-[ext_resource type="PackedScene" uid="uid://b20q22csfyupc" path="res://components/camera/test/component.tscn" id="4_r1bni"]
-[ext_resource type="Shader" path="res://shaders/chromatic.gdshader" id="5_j3c8w"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e8r0h"]
-shader = ExtResource("5_j3c8w")
-shader_parameter/chromatic_aberration_intensity = 0.9
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6klx1"]
 
@@ -21,31 +16,12 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("MeshInstance3D:position")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath("ShaderCamera:position")
-properties/3/spawn = true
-properties/3/replication_mode = 1
-properties/4/path = NodePath("ShaderCamera:rotation")
-properties/4/spawn = true
-properties/4/replication_mode = 1
 
 [node name="player_entity" type="CharacterBody3D" node_paths=PackedStringArray("velocity_component", "camera_component")]
 input_ray_pickable = false
 script = ExtResource("1_x62rb")
 velocity_component = NodePath("velocity")
-camera_component = NodePath("ShaderCamera")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_e8r0h")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+camera_component = NodePath("camera")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -55,19 +31,22 @@ shape = SubResource("CapsuleShape3D_6klx1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_uwy6c")
 
+[node name="camera" parent="." instance=ExtResource("1_x844l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+scan_range = 900.0
+scan_interval = 8.5
+ray_count = 500
+ray_length = 100.0
+highlight_size = Vector2(0.02, 0.02)
+sweep_steps_horizontal = 100
+sweep_steps_vertical = 100
+
 [node name="controller" parent="." node_paths=PackedStringArray("velocity", "camera", "body") instance=ExtResource("2_alql2")]
 velocity = NodePath("../velocity")
-camera = NodePath("../ShaderCamera")
+camera = NodePath("../camera")
 body = NodePath("..")
 
 [node name="velocity" parent="." instance=ExtResource("3_2tc5j")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_a35x5")
-
-[node name="ShaderCamera" parent="." instance=ExtResource("4_r1bni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-ray_count = 10
-ray_length = 30.0
-sweep_steps_horizontal = 200
-sweep_steps_vertical = 200
