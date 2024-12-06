@@ -22,8 +22,10 @@ func _ready():
 func join_game(address: String, room_info: Dictionary, player_info: Dictionary):
   var peer = ENetMultiplayerPeer.new()
   var error = peer.create_client(address, PORT)
+
   if error:
     return error
+
   multiplayer.multiplayer_peer = peer
   await delay(0.1)
   _register_player.rpc_id(1, room_info, player_info)
