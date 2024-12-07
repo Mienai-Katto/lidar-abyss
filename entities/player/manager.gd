@@ -9,9 +9,9 @@ extends CharacterBody3D
 @onready var inventory_texture = get_node("Inventário/Control/Item")
 @onready var inventory_label = get_node("Inventário/Control/Label")
 @onready var objective = get_node("Objetivo/Control/Label")
-@onready var extraction_area = get_node("/root/Map-01/Extração/ExtractionArea")
-@onready var static_body_extraction = get_node("/root/Map-01/Extração/ExtractionArea/StaticBody3D")
-var inventory: Array = ["Chronium"]
+@onready var extraction_area = get_node("/root/Map_01/Extração/ExtractionArea")
+@onready var static_body_extraction = get_node("/root/Map_01/Extração/ExtractionArea/StaticBody3D")
+var inventory: Array = []
 var delivered: bool = false
 
 # @onready var Spawner = get_parent().get_node("Spawner")

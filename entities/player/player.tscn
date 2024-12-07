@@ -92,24 +92,32 @@ size_flags_vertical = 8
 mouse_filter = 2
 
 [node name="Item" type="TextureRect" parent="Inventário/Control"]
-visible = false
-layout_mode = 0
-offset_left = 1079.0
-offset_top = 584.0
-offset_right = 1127.0
-offset_bottom = 629.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.937
+anchor_top = 0.901
+anchor_right = 0.978
+anchor_bottom = 0.971
+offset_left = -0.424072
+offset_top = 0.151978
+offset_right = 0.343994
+offset_bottom = -0.208069
 mouse_filter = 2
 texture = ExtResource("3_pr1xw")
 expand_mode = 1
 flip_h = true
 
 [node name="Label" type="Label" parent="Inventário/Control"]
-visible = false
-layout_mode = 0
-offset_left = 1076.0
-offset_top = 626.0
-offset_right = 1154.0
-offset_bottom = 649.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.934
+anchor_top = 0.966
+anchor_right = 1.002
+anchor_bottom = 1.002
+offset_left = 0.0319824
+offset_top = 0.0319824
+offset_right = -0.304077
+offset_bottom = -0.296082
 text = "Chronium"
 label_settings = SubResource("LabelSettings_vwr2e")
 

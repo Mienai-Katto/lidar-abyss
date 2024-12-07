@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ujsf0vkltmrs"]
+
+[ext_resource type="PackedScene" uid="uid://brrxq3bvyctrv" path="res://entities/extraction/extraction_area.tscn" id="1_r32i2"]
+
+[node name="Extração" type="Node3D"]
+
+[node name="ExtractionArea" parent="." instance=ExtResource("1_r32i2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27335, 0.270368, 11.6007)
