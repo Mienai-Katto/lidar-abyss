@@ -27,16 +27,16 @@ void fragment() {
 			pixels[row*3+col] = convolution(SCREEN_TEXTURE, uv, SCREEN_PIXEL_SIZE);
 		}
 	}
-	
+
 	vec3 gx = (pixels[0] * -1.0 + pixels[3] * -2.0 + pixels[6] * -1.0
 				+ pixels[2] *  1.0 + pixels[5] * 2.0 + pixels[8] * 1.0
  	);
 	vec3 gy = (pixels[0] * -1.0 + pixels[1] * -2.0 + pixels[2] * -1.0
 				+ pixels[6] *  1.0 + pixels[7] * 2.0 + pixels[8] * 1.0
  	);
-	
+
 	vec3 sobel = sqrt(gx * gx + gy * gy);
-	
+
 	// If sobel has any edge detection, set to white
 	COLOR = vec4(step(0.1, length(sobel)) * vec3(1.0), 1.0);
 }

@@ -93,3 +93,4 @@ crouch={
 [rendering]
 
 occlusion_culling/bvh_build_quality=1
+occlusion_culling/use_occlusion_culling=true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=1623 format=4 uid="uid://hy6irps2mbha"]
+[gd_scene load_steps=1626 format=4 uid="uid://hy6irps2mbha"]
 
 [ext_resource type="Script" path="res://levels/map-01/manager.gd" id="1_uvbek"]
 [ext_resource type="PackedScene" uid="uid://ujsf0vkltmrs" path="res://levels/map-01/extração.tscn" id="2_3tf21"]
@@ -24,6 +24,9 @@
 [ext_resource type="Resource" uid="uid://b70dbh5v15xno" path="res://addons/qodot/game_definitions/fgd/solid_classes/trigger_solid_class.tres" id="21_ohhiy"]
 [ext_resource type="Resource" uid="uid://bu2f3lupsjhfp" path="res://addons/qodot/game_definitions/fgd/solid_classes/wall_solid_class.tres" id="22_inimr"]
 [ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="23_0yvn3"]
+[ext_resource type="PackedScene" uid="uid://cu7o5m14eklo4" path="res://entities/collection_box/collect_section_east.tscn" id="25_6wxvy"]
+[ext_resource type="PackedScene" uid="uid://dh5uqylo2i8yq" path="res://entities/collection_box/collect_section_north.tscn" id="26_gany1"]
+[ext_resource type="PackedScene" uid="uid://d4mi684dam66w" path="res://entities/collection_box/collect_section_west.tscn" id="27_ifyi1"]
 
 [sub_resource type="Resource" id="Resource_g0ve2"]
 script = ExtResource("23_0yvn3")
@@ -11985,3 +11988,11 @@ spawn_path = NodePath("..")
 
 [node name="player_entity" parent="." instance=ExtResource("2_txmbn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56642, 0, 6.42095)
+
+[node name="Collect" type="Node3D" parent="."]
+
+[node name="Coleta - Setor Leste" parent="Collect" instance=ExtResource("25_6wxvy")]
+
+[node name="Coleta - Setor Norte" parent="Collect" instance=ExtResource("26_gany1")]
+
+[node name="Coleta - Setor Oeste" parent="Collect" instance=ExtResource("27_ifyi1")]
