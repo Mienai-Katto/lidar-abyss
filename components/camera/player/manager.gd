@@ -2,8 +2,8 @@ extends Camera3D
 
 @export var scan_range: float = 900.0
 @export var scan_interval: float = 8.5
-@export var ray_count: int = 500
-@export var ray_length: float = 100.0
+@export var ray_count: int = 100
+@export var ray_length: float = 20.0
 
 @export var highlight_size: Vector2 = Vector2(0.02, 0.02)  # For plane size
 
@@ -80,7 +80,7 @@ func perform_full_sweep():
 					var is_red = is_node_in_group_or_parent(collider, "red")
 					spawn_temporary_cube(result.position, is_red)
 			# Yield to the engine after processing multiple rows
-			await get_tree().process_frame
+			# await get_tree().process_frame
 
 func spawn_temporary_cube(position: Vector3, is_red: bool):
 	var mesh_instance = MeshInstance3D.new()
@@ -109,9 +109,9 @@ func spawn_temporary_cube(position: Vector3, is_red: bool):
 	get_tree().root.add_child(mesh_instance)
 	mesh_instance.global_transform.origin = position
 
-	# Remove plane after interval
-	await get_tree().create_timer(scan_interval).timeout
-	mesh_instance.queue_free()
+	# # Remove plane after interval
+	# await get_tree().create_timer(scan_interval).timeout
+	# mesh_instance.queue_free()
 
 func is_node_in_group_or_parent(node: Node, group_name: String) -> bool:
 	var current_node = node

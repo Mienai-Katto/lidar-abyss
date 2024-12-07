@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://didbm5q8eg0fo"]
+
+[ext_resource type="Script" path="res://levels/menu/manager.gd" id="1_b3h32"]
+[ext_resource type="Script" path="res://addons/awaitable_http_request/awaitable_http_request.gd" id="2_tk4kl"]
+
+[node name="Menu" type="Control" node_paths=PackedStringArray("http")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b3h32")
+http = NodePath("AwaitableHTTPRequest")
+
+[node name="AwaitableHTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource("2_tk4kl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -61.5
+offset_right = 125.0
+offset_bottom = 61.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Insert the code"
+horizontal_alignment = 1
+
+[node name="CodeInput" type="LineEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "b84a8ac478a3"
+
+[node name="EnterButton" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "Enter"
+
+[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/EnterButton" to="." method="_on_enter_button_pressed"]

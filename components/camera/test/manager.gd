@@ -1,8 +1,8 @@
 extends Camera3D
 
 @export var scan_interval: float = 8.5
-@export var ray_count: int = 500
-@export var ray_length: float = 100.0
+@export var ray_count: int = 100
+@export var ray_length: float = 20.0
 @export var sweep_steps_horizontal: int = 100
 @export var sweep_steps_vertical: int = 100
 @export var point_size: float = 2.5
@@ -43,16 +43,16 @@ func _input(event):
 			await perform_full_sweep()
 
 func _process(delta):
-	var points_updated = false
-	for point in point_positions:
-		point["time_left"] -= delta
-		if point["time_left"] <= 0:
-			points_updated = true
+	# var points_updated = false
+	# for point in point_positions:
+	# 	point["time_left"] -= delta
+	# 	if point["time_left"] <= 0:
+	# 		points_updated = true
 
-	if points_updated:
-		point_positions = point_positions.filter(filter_by_time_left)
-		update_point_mesh()
-	
+	# if points_updated:
+	# 	point_positions = point_positions.filter(filter_by_time_left)
+	# 	update_point_mesh()
+
 	# Pass the camera's position to the shader
 	point_material.set_shader_parameter("player_position", global_position)
 
@@ -152,11 +152,11 @@ func perform_full_sweep():
 				var result = space_state.intersect_ray(query)
 				if result:
 					var collider = result.collider
-					var is_red = is_node_in_group_or_parent(collider, "red")
+					# var is_red = is_node_in_group_or_parent(collider, "red")
 					point_positions.append({
 						"position": result.position,
-						"is_red": is_red,
+						"is_red": false,
 						"time_left": scan_interval
 					})
+			await get_tree().process_frame
 		update_point_mesh()
-		await get_tree().process_frame
