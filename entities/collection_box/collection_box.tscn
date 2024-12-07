@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bysv8xs0p1kju"]
+
+[ext_resource type="Script" path="res://entities/collection_box/manager.gd" id="1_ggvbb"]
+[ext_resource type="Script" path="res://entities/collection_box/collection_box.gd" id="1_mysck"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i12mv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_88bb5"]
+
+[node name="Coleta" type="CSGBox3D" groups=["red"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00850964, 0.659608, -0.231624)
+size = Vector3(2, 1.3, 1)
+script = ExtResource("1_mysck")
+item_name = "Chronium"
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_ggvbb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(2, 0, 0, 0, 1.3, 0, 0, 0, 3, 0, 0, 1.015)
+shape = SubResource("BoxShape3D_i12mv")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["green"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 1.3, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_88bb5")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

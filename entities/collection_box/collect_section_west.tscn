@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4mi684dam66w"]
+
+[ext_resource type="PackedScene" uid="uid://bysv8xs0p1kju" path="res://entities/collection_box/collection_box.tscn" id="1_0d5hc"]
+
+[node name="Coleta - Setor Oeste" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 101.179, -6.08279, -78.3551)
+
+[node name="Coleta" parent="." instance=ExtResource("1_0d5hc")]
+transform = Transform3D(0.0171906, 0, 0.999852, 0, 1, 0, -0.999852, 0, 0.0171906, 2.45784, 0.889307, 0.233147)
+
+[node name="Coleta 2" parent="." instance=ExtResource("1_0d5hc")]
+transform = Transform3D(-0.0948902, 0, 0.995488, 0, 1, 0, -0.995488, 0, -0.0948902, 2.74495, 1.00313, 24.4039)
+
+[node name="Coleta 3" parent="." instance=ExtResource("1_0d5hc")]
+transform = Transform3D(-0.0695128, 0, 0.997581, 0, 1, 0, -0.997581, 0, -0.0695128, 3.18491, 0.983959, 44.5817)

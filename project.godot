@@ -27,6 +27,11 @@ project/assembly_name="lidar-abyss"
 
 enabled=PackedStringArray()
 
+[global_group]
+
+player="Grupo atribuído aos jogadores."
+green=""
+
 [input]
 
 left={
