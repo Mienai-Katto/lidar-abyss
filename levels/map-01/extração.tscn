@@ -5,4 +5,4 @@
 [node name="Extração" type="Node3D"]
 
 [node name="ExtractionArea" parent="." instance=ExtResource("1_r32i2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27335, 0.270368, 11.6007)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27335, -0.0755933, 11.6007)
