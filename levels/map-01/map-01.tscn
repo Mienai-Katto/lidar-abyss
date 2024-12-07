@@ -6749,8 +6749,10 @@ script = ExtResource("1_uvbek")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0298238, 0)
 
 [node name="Entrega 2" parent="." instance=ExtResource("3_3qk8e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478151, 0)
 
 [node name="Entrega 1" parent="." instance=ExtResource("4_g8eeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.513796, 0)
 
 [node name="Map" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -11987,7 +11989,7 @@ environment = SubResource("Environment_lxdkj")
 spawn_path = NodePath("..")
 
 [node name="player_entity" parent="." instance=ExtResource("2_txmbn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56642, 0, 6.42095)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102.393, -3.62698, -4.42683)
 
 [node name="Collect" type="Node3D" parent="."]
 
