@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b6u4fo7p1qjv0"]
+[gd_scene load_steps=17 format=3 uid="uid://b6u4fo7p1qjv0"]
 
 [ext_resource type="Script" path="res://entities/player/manager.gd" id="1_x62rb"]
 [ext_resource type="PackedScene" uid="uid://wnmbpn8knhf7" path="res://components/controller/player/component.tscn" id="2_alql2"]
@@ -18,6 +18,21 @@ font = ExtResource("3_dws7t")
 [sub_resource type="LabelSettings" id="LabelSettings_tj52j"]
 font = ExtResource("3_dws7t")
 
+[sub_resource type="Animation" id="Animation_3q6ao"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.225]
+}
+
 [sub_resource type="Animation" id="Animation_5kske"]
 resource_name = "collect_item_label"
 length = 1.5
@@ -32,21 +47,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.225, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_3q6ao"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:visible_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.225]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_56inh"]
@@ -75,6 +75,8 @@ properties/3/replication_mode = 1
 properties/4/path = NodePath("ShaderCamera:rotation")
 properties/4/spawn = true
 properties/4/replication_mode = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g008u"]
 
 [node name="player_entity" type="CharacterBody3D" node_paths=PackedStringArray("velocity_component", "camera_component") groups=["player"]]
 input_ray_pickable = false
@@ -220,5 +222,9 @@ replication_config = SubResource("SceneReplicationConfig_a35x5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.983294, 0)
+shape = SubResource("CapsuleShape3D_g008u")
 
 [connection signal="animation_finished" from="Ação/Control/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
