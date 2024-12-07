@@ -72,3 +72,5 @@ ray_count = 10
 ray_length = 30.0
 sweep_steps_horizontal = 200
 sweep_steps_vertical = 200
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
