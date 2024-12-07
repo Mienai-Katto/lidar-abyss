@@ -1,9 +1,7 @@
-[gd_scene load_steps=222 format=4 uid="uid://hy6irps2mbha"]
+[gd_scene load_steps=220 format=4 uid="uid://hy6irps2mbha"]
 
 [ext_resource type="PackedScene" uid="uid://b6u4fo7p1qjv0" path="res://entities/player/player.tscn" id="2_txmbn"]
 [ext_resource type="PackedScene" uid="uid://bysv8xs0p1kju" path="res://entities/collection_box/collection_box.tscn" id="4_jwy5d"]
-[ext_resource type="PackedScene" uid="uid://bdyi48digwjku" path="res://entities/delivery_room/delivery_area.tscn" id="5_tp3e4"]
-[ext_resource type="PackedScene" uid="uid://brrxq3bvyctrv" path="res://entities/extraction/extraction_area.tscn" id="6_y6yb7"]
 [ext_resource type="Shader" path="res://shaders/edge.gdshader" id="21_r3t16"]
 [ext_resource type="Texture2D" uid="uid://2w5c465nubb0" path="res://textures/texture_01.png" id="22_c7lrk"]
 
@@ -691,7 +689,7 @@ glow_enabled = true
 script = SubResource("GDScript_0nnt2")
 
 [node name="player_entity" parent="." instance=ExtResource("2_txmbn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.854599, 0.88516, 3.66037)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.288, -4.82628, -41.1532)
 
 [node name="QodotMap" type="Node3D" parent="."]
 
@@ -1371,19 +1369,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.56481, -0.0082593, -0.2379
 
 [node name="Coleta 4" parent="Coleta - Oeste" instance=ExtResource("4_jwy5d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0548, -0.00826025, -0.232048)
-
-[node name="Entrega 1" type="Node3D" parent="."]
-
-[node name="DeliveryArea" parent="Entrega 1" instance=ExtResource("5_tp3e4")]
-
-[node name="Entrega 2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.218, 0, -51.5916)
-
-[node name="DeliveryArea" parent="Entrega 2" instance=ExtResource("5_tp3e4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.16171, -5.97686, -83.5237)
-
-[node name="Extração" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68392, 0, 8.19864)
-
-[node name="Extraction" parent="Extração" instance=ExtResource("6_y6yb7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82083, -0.220213, 0.75447)

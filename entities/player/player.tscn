@@ -1,14 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6u4fo7p1qjv0"]
+[gd_scene load_steps=12 format=3 uid="uid://b6u4fo7p1qjv0"]
 
 [ext_resource type="Script" path="res://entities/player/manager.gd" id="1_x62rb"]
 [ext_resource type="PackedScene" uid="uid://wnmbpn8knhf7" path="res://components/controller/player/component.tscn" id="2_alql2"]
 [ext_resource type="PackedScene" uid="uid://blo74ee57pugr" path="res://components/velocity/component.tscn" id="3_2tc5j"]
+[ext_resource type="Texture2D" uid="uid://0egqqdso4okc" path="res://textures/chronium-op.png" id="3_pr1xw"]
 [ext_resource type="PackedScene" uid="uid://b20q22csfyupc" path="res://components/camera/test/component.tscn" id="4_r1bni"]
 [ext_resource type="Shader" path="res://shaders/chromatic.gdshader" id="5_j3c8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e8r0h"]
 shader = ExtResource("5_j3c8w")
 shader_parameter/chromatic_aberration_intensity = 0.9
+
+[sub_resource type="LabelSettings" id="LabelSettings_vwr2e"]
+font_size = 13
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6klx1"]
 
@@ -22,7 +26,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="player_entity" type="CharacterBody3D" node_paths=PackedStringArray("velocity_component", "camera_component")]
+[node name="player_entity" type="CharacterBody3D" node_paths=PackedStringArray("velocity_component", "camera_component") groups=["player"]]
 input_ray_pickable = false
 script = ExtResource("1_x62rb")
 velocity_component = NodePath("velocity")
@@ -38,6 +42,67 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Objetivo" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Objetivo"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -577.5
+offset_right = 577.5
+offset_bottom = 642.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Objetivo/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.5
+offset_right = 65.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Colete Chronium"
+
+[node name="Inventário" type="CanvasLayer" parent="."]
+physics_interpolation_mode = 2
+
+[node name="Control" type="Control" parent="Inventário"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="Item" type="TextureRect" parent="Inventário/Control"]
+visible = false
+layout_mode = 0
+offset_left = 1079.0
+offset_top = 584.0
+offset_right = 1127.0
+offset_bottom = 629.0
+mouse_filter = 2
+texture = ExtResource("3_pr1xw")
+expand_mode = 1
+flip_h = true
+
+[node name="Label" type="Label" parent="Inventário/Control"]
+visible = false
+layout_mode = 0
+offset_left = 1076.0
+offset_top = 626.0
+offset_right = 1154.0
+offset_bottom = 649.0
+text = "Chronium"
+label_settings = SubResource("LabelSettings_vwr2e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

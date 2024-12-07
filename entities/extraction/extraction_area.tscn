@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://brrxq3bvyctrv"]
+
+[ext_resource type="PackedScene" uid="uid://bdyi48digwjku" path="res://entities/delivery_room/delivery_area.tscn" id="1_ks03y"]
+[ext_resource type="Script" path="res://entities/extraction/manger.gd" id="2_251vx"]
+
+[node name="ExtractionArea" instance=ExtResource("1_ks03y")]
+
+[node name="Area3D" parent="." index="0"]
+script = ExtResource("2_251vx")
