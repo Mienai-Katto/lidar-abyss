@@ -3,3 +3,5 @@
 /android/
 autosave
 addons
+*.exe
+*.pck

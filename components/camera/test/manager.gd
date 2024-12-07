@@ -7,30 +7,28 @@ extends Camera3D
 @export var sweep_steps_vertical: int = 100
 @export var point_size: float = 2.5
 @export var fade_power: float = 0.15
-
-var lidar_sfx = preload("res://sfx/lidar-base.mp3")
-var lidar_full_sfx = preload("res://sfx/lidar-full.mp3")
+@export var environment_scan_cooldown: float = 0.4
+@export var full_sweep_scan_cooldown: float = 3.6
 
 var point_positions = []
 var point_mesh_instance: MeshInstance3D
 var point_material: ShaderMaterial
 
+var lidar_sfx = preload("res://sfx/lidar-base.mp3")
+var lidar_full_sfx = preload("res://sfx/lidar-full.mp3")
+
+var last_environment_scan_time: float = -1000.0
+var last_full_sweep_scan_time: float = -1000.0
+
 func _ready():
-	# Initialize the MeshInstance3D
 	point_mesh_instance = MeshInstance3D.new()
-
-	# Add to the root node or a stationary node
 	get_tree().get_root().add_child.call_deferred(point_mesh_instance)
-
-	# Reset its transform
 	point_mesh_instance.transform = Transform3D()
 
-	# Create and assign the shader material
 	point_material = ShaderMaterial.new()
 	point_material.shader = load("res://shaders/lidar.gdshader")
 	point_mesh_instance.material_override = point_material
 
-	# Set initial point size
 	point_material.set_shader_parameter("point_size", point_size)
 	point_material.set_shader_parameter("max_fade_distance", ray_length)
 	point_material.set_shader_parameter("fade_power", fade_power)
@@ -40,33 +38,36 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			perform_environment_scan()
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			await perform_full_sweep()
+			perform_full_sweep()
 
 func _process(delta):
-	# var points_updated = false
-	# for point in point_positions:
-	# 	point["time_left"] -= delta
-	# 	if point["time_left"] <= 0:
-	# 		points_updated = true
+	var points_updated = false
+	for point in point_positions:
+		point["time_left"] -= delta
+		if point["time_left"] <= 0:
+			points_updated = true
 
-	# if points_updated:
-	# 	point_positions = point_positions.filter(filter_by_time_left)
-	# 	update_point_mesh()
-
-	# Pass the camera's position to the shader
+	if points_updated:
+		point_positions = point_positions.filter(filter_by_time_left)
+		update_point_mesh()
+	
 	point_material.set_shader_parameter("player_position", global_position)
 
 func filter_by_time_left(p):
 	return p["time_left"] > 0
 
 func perform_environment_scan():
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time < last_environment_scan_time + environment_scan_cooldown:
+		return
+
+	last_environment_scan_time = current_time
 	$"../AudioStreamPlayer".stream = lidar_sfx
 	$"../AudioStreamPlayer".play()
-	var camera_forward = -global_transform.basis.z
 	
+	var camera_forward = -global_transform.basis.z
 
 	for i in range(ray_count):
-		# Create a cone of rays in front of the camera
 		var ray_direction = camera_forward.rotated(Vector3.UP, randf_range(-PI/4, PI/4))
 		ray_direction = ray_direction.rotated(Vector3.RIGHT, randf_range(-PI/4, PI/4))
 		ray_direction = ray_direction.normalized()
@@ -82,11 +83,9 @@ func perform_environment_scan():
 		if result:
 			var collider = result.collider
 			var is_red = is_node_in_group_or_parent(collider, "red")
-			var is_green = is_node_in_group_or_parent(collider, "green")
 			point_positions.append({
 				"position": result.position,
 				"is_red": is_red,
-				"is_green": is_green,
 				"time_left": scan_interval
 			})
 	update_point_mesh()
@@ -97,17 +96,8 @@ func update_point_mesh():
 
 	for point in point_positions:
 		vertices.append(point["position"])
-		var color : Color
-		
-		if point["is_red"]:
-			color = Color(1, 0, 0, 1)
-		elif point["is_green"]:
-			color = Color(0, 1, 0, 1) 
-		else:
-			color = Color(1, 1, 1, 1) 
-			
+		var color = Color(1, 0, 0, 1) if point["is_red"] else Color(1, 1, 1, 1)
 		colors.append(color)
-		
 
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -128,8 +118,14 @@ func is_node_in_group_or_parent(node: Node, group_name: String) -> bool:
 	return false
 
 func perform_full_sweep():
+	var current_time = Time.get_ticks_msec() / 1000.0
+	if current_time < last_full_sweep_scan_time + full_sweep_scan_cooldown:
+		return
+
+	last_full_sweep_scan_time = current_time
 	$"../AudioStreamPlayer".stream = lidar_full_sfx
 	$"../AudioStreamPlayer".play()
+	
 	var viewport_size = get_viewport().get_texture().get_size()
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.new()
@@ -139,7 +135,7 @@ func perform_full_sweep():
 	var y_step = viewport_size.y / (sweep_steps_vertical - 1.0)
 	var max_offset = 0.5 * min(x_step, y_step)
 
-	var rows_per_frame = 1  # Adjust this value for speed and smoothness
+	var rows_per_frame = 1
 
 	for i in range(0, sweep_steps_vertical, rows_per_frame):
 		for k in range(rows_per_frame):
@@ -164,12 +160,10 @@ func perform_full_sweep():
 				if result:
 					var collider = result.collider
 					var is_red = is_node_in_group_or_parent(collider, "red")
-					var is_green = is_node_in_group_or_parent(collider, "green")
 					point_positions.append({
 						"position": result.position,
 						"is_red": is_red,
-						"is_green": is_green,
 						"time_left": scan_interval
 					})
-			await get_tree().process_frame
 		update_point_mesh()
+		await get_tree().process_frame

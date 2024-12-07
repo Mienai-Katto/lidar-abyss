@@ -4,3 +4,4 @@
 
 [node name="ShaderCamera" type="Camera3D"]
 script = ExtResource("1_0ckbg")
+fade_power = 0.1
