@@ -59,10 +59,6 @@ _data = {
 font = ExtResource("3_dws7t")
 font_size = 13
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6klx1"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_uwy6c"]
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a35x5"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -209,14 +205,6 @@ offset_right = 29.8638
 offset_bottom = 23.032
 text = "Chronium"
 label_settings = SubResource("LabelSettings_vwr2e")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_6klx1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_uwy6c")
 
 [node name="controller" parent="." node_paths=PackedStringArray("velocity", "camera", "body") instance=ExtResource("2_alql2")]
 velocity = NodePath("../velocity")

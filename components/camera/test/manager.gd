@@ -82,14 +82,15 @@ func perform_environment_scan():
 
 		if result:
 			var collider = result.collider
-			var is_red = is_node_in_group_or_parent(collider, "red")
-			var is_green = is_node_in_group_or_parent(collider, "green")
-			point_positions.append({
-				"position": result.position,
-				"is_red": is_red,
-				"is_green": is_green,
-				"time_left": scan_interval
-			})
+			if (!is_node_in_group_or_parent(collider, "monster")):
+				var is_red = is_node_in_group_or_parent(collider, "red")
+				var is_green = is_node_in_group_or_parent(collider, "green")
+				point_positions.append({
+					"position": result.position,
+					"is_red": is_red,
+					"is_green": is_green,
+					"time_left": scan_interval
+				})
 	update_point_mesh()
 
 func update_point_mesh():
@@ -168,13 +169,14 @@ func perform_full_sweep():
 				var result = space_state.intersect_ray(query)
 				if result:
 					var collider = result.collider
-					var is_red = is_node_in_group_or_parent(collider, "red")
-					var is_green = is_node_in_group_or_parent(collider, "green")
-					point_positions.append({
-						"position": result.position,
-						"is_red": is_red,
-						"is_green": is_green,
-						"time_left": scan_interval
-					})
+					if (!is_node_in_group_or_parent(collider, "monster")):
+						var is_red = is_node_in_group_or_parent(collider, "red")
+						var is_green = is_node_in_group_or_parent(collider, "green")
+						point_positions.append({
+							"position": result.position,
+							"is_red": is_red,
+							"is_green": is_green,
+							"time_left": scan_interval
+						})
 		update_point_mesh()
 		await get_tree().process_frame

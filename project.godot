@@ -31,6 +31,7 @@ enabled=PackedStringArray()
 
 player="Grupo atribuído aos jogadores."
 green=""
+monster=""
 
 [input]
 
