@@ -8,6 +8,9 @@ extends Camera3D
 @export var point_size: float = 2.5
 @export var fade_power: float = 0.15
 
+var lidar_sfx = preload("res://sfx/lidar-base.mp3")
+var lidar_full_sfx = preload("res://sfx/lidar-full.mp3")
+
 var point_positions = []
 var point_mesh_instance: MeshInstance3D
 var point_material: ShaderMaterial
@@ -57,7 +60,10 @@ func filter_by_time_left(p):
 	return p["time_left"] > 0
 
 func perform_environment_scan():
+	$"../AudioStreamPlayer".stream = lidar_sfx
+	$"../AudioStreamPlayer".play()
 	var camera_forward = -global_transform.basis.z
+	
 
 	for i in range(ray_count):
 		# Create a cone of rays in front of the camera
@@ -111,6 +117,8 @@ func is_node_in_group_or_parent(node: Node, group_name: String) -> bool:
 	return false
 
 func perform_full_sweep():
+	$"../AudioStreamPlayer".stream = lidar_full_sfx
+	$"../AudioStreamPlayer".play()
 	var viewport_size = get_viewport().get_texture().get_size()
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsRayQueryParameters3D.new()

@@ -58,3 +58,5 @@ replication_config = SubResource("SceneReplicationConfig_a35x5")
 
 [node name="ShaderCamera" parent="." instance=ExtResource("4_r1bni")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
