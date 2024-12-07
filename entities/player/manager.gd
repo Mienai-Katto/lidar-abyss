@@ -11,6 +11,9 @@ extends CharacterBody3D
 @onready var objective = get_node("Objetivo/Control/Label")
 @onready var extraction_area = get_node("/root/Map_01/Extração/ExtractionArea")
 @onready var static_body_extraction = get_node("/root/Map_01/Extração/ExtractionArea/StaticBody3D")
+@onready var text_animation = get_node("Ação/Control/AnimationPlayer")
+@onready var text_collect = get_node("Ação/Control/Label")
+
 var inventory: Array = []
 var delivered: bool = false
 
@@ -40,6 +43,9 @@ func add_item(item_name: String) -> void:
 		inventory.append(item_name)
 		update_inventory_display()
 		objective.text = "Entregue o Chronium coletado"
+		text_collect.visible = true
+		text_animation.play("collect_item_label")
+		
 		print("Inventário atualizado: ", inventory)
 
 func remove_item(item_name: String) -> void:
@@ -72,3 +78,7 @@ func _physics_process(_delta):
   #   position.y = 10
 
 	velocity_component.move(self)
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	text_collect.queue_free()
