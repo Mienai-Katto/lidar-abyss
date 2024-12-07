@@ -76,9 +76,11 @@ func perform_environment_scan():
 		if result:
 			var collider = result.collider
 			var is_red = is_node_in_group_or_parent(collider, "red")
+			var is_green = is_node_in_group_or_parent(collider, "green")
 			point_positions.append({
 				"position": result.position,
 				"is_red": is_red,
+				"is_green": is_green,
 				"time_left": scan_interval
 			})
 	update_point_mesh()
@@ -89,8 +91,17 @@ func update_point_mesh():
 
 	for point in point_positions:
 		vertices.append(point["position"])
-		var color = Color(1, 0, 0, 1) if point["is_red"] else Color(1, 1, 1, 1)
+		var color : Color
+		
+		if point["is_red"]:
+			color = Color(1, 0, 0, 1)
+		elif point["is_green"]:
+			color = Color(0, 1, 0, 1) 
+		else:
+			color = Color(1, 1, 1, 1) 
+			
 		colors.append(color)
+		
 
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -144,10 +155,12 @@ func perform_full_sweep():
 				var result = space_state.intersect_ray(query)
 				if result:
 					var collider = result.collider
-					# var is_red = is_node_in_group_or_parent(collider, "red")
+					var is_red = is_node_in_group_or_parent(collider, "red")
+					var is_green = is_node_in_group_or_parent(collider, "green")
 					point_positions.append({
 						"position": result.position,
-						"is_red": false,
+						"is_red": is_red,
+						"is_green": is_green,
 						"time_left": scan_interval
 					})
 			await get_tree().process_frame
