@@ -1,42 +1,13 @@
-[gd_scene load_steps=1626 format=4 uid="uid://hy6irps2mbha"]
+[gd_scene load_steps=1605 format=4 uid="uid://hy6irps2mbha"]
 
 [ext_resource type="Script" path="res://levels/map-01/manager.gd" id="1_uvbek"]
 [ext_resource type="PackedScene" uid="uid://ujsf0vkltmrs" path="res://levels/map-01/extração.tscn" id="2_3tf21"]
 [ext_resource type="PackedScene" uid="uid://b6u4fo7p1qjv0" path="res://entities/player/player.tscn" id="2_txmbn"]
 [ext_resource type="PackedScene" uid="uid://0bp6043gm8nu" path="res://levels/map-01/entrega_2.tscn" id="3_3qk8e"]
 [ext_resource type="PackedScene" uid="uid://bsampljhg5m0c" path="res://levels/map-01/entrega_1.tscn" id="4_g8eeh"]
-[ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="5_5g7d1"]
-[ext_resource type="Resource" uid="uid://dgm276g7bw8q5" path="res://addons/qodot/game_definitions/fgd/base_classes/target_base_class.tres" id="6_6d7jc"]
-[ext_resource type="Resource" uid="uid://ccdjpf5j25aua" path="res://addons/qodot/game_definitions/fgd/base_classes/targetname_base_class.tres" id="7_02nlx"]
-[ext_resource type="Resource" uid="uid://c5o31v30rw7v5" path="res://addons/qodot/game_definitions/fgd/base_classes/light_base_class.tres" id="8_wd2p7"]
-[ext_resource type="Resource" uid="uid://dxp37dladbquv" path="res://addons/qodot/game_definitions/fgd/solid_classes/worldspawn_solid_class.tres" id="9_ikge1"]
-[ext_resource type="Resource" uid="uid://cw4s1hnxqetee" path="res://addons/qodot/game_definitions/fgd/solid_classes/func_group_solid_class.tres" id="10_nc8sy"]
-[ext_resource type="Resource" uid="uid://bnbdy0cky2bo" path="res://addons/qodot/game_definitions/fgd/solid_classes/group_solid_class.tres" id="11_fga8s"]
-[ext_resource type="Resource" uid="uid://dy7undvxjvodx" path="res://addons/qodot/game_definitions/fgd/solid_classes/illusionary_solid_class.tres" id="12_d35lh"]
-[ext_resource type="Resource" uid="uid://v3fbh0xn5d2h" path="res://addons/qodot/game_definitions/fgd/solid_classes/physics_solid_class.tres" id="13_w1sqs"]
-[ext_resource type="Resource" uid="uid://bu3h1cvdigp1i" path="res://addons/qodot/game_definitions/fgd/point_classes/signal_point_class.tres" id="14_33gn5"]
-[ext_resource type="Resource" uid="uid://dbh35xj5q8gvc" path="res://addons/qodot/game_definitions/fgd/point_classes/receiver_point_class.tres" id="15_baify"]
-[ext_resource type="Resource" uid="uid://ccwosedfa8v8d" path="res://addons/qodot/game_definitions/fgd/point_classes/light_point_class.tres" id="16_3m6tb"]
-[ext_resource type="Resource" uid="uid://ckg61cpr5p63l" path="res://addons/qodot/game_definitions/fgd/solid_classes/button_solid_class.tres" id="17_11fje"]
-[ext_resource type="Resource" uid="uid://b8aisardk4k4u" path="res://addons/qodot/game_definitions/fgd/solid_classes/detail_solid_class.tres" id="18_oktty"]
-[ext_resource type="Resource" uid="uid://b3yn012fy6782" path="res://addons/qodot/game_definitions/fgd/solid_classes/mover_solid_class.tres" id="19_0m2ky"]
-[ext_resource type="Resource" uid="uid://de6w02sa4ckl5" path="res://addons/qodot/game_definitions/fgd/solid_classes/rotate_solid_class.tres" id="20_q1wt2"]
-[ext_resource type="Resource" uid="uid://b70dbh5v15xno" path="res://addons/qodot/game_definitions/fgd/solid_classes/trigger_solid_class.tres" id="21_ohhiy"]
-[ext_resource type="Resource" uid="uid://bu2f3lupsjhfp" path="res://addons/qodot/game_definitions/fgd/solid_classes/wall_solid_class.tres" id="22_inimr"]
-[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="23_0yvn3"]
 [ext_resource type="PackedScene" uid="uid://cu7o5m14eklo4" path="res://entities/collection_box/collect_section_east.tscn" id="25_6wxvy"]
 [ext_resource type="PackedScene" uid="uid://dh5uqylo2i8yq" path="res://entities/collection_box/collect_section_north.tscn" id="26_gany1"]
 [ext_resource type="PackedScene" uid="uid://d4mi684dam66w" path="res://entities/collection_box/collect_section_west.tscn" id="27_ifyi1"]
-
-[sub_resource type="Resource" id="Resource_g0ve2"]
-script = ExtResource("23_0yvn3")
-export_file = false
-target_folder = "N:/repos/lidar-abyss/levels/map-01"
-fgd_name = "Qodot"
-base_fgd_files = Array[Resource]([])
-entity_definitions = Array[Resource]([ExtResource("6_6d7jc"), ExtResource("7_02nlx"), ExtResource("8_wd2p7"), ExtResource("9_ikge1"), ExtResource("10_nc8sy"), ExtResource("11_fga8s"), ExtResource("12_d35lh"), ExtResource("13_w1sqs"), ExtResource("14_33gn5"), ExtResource("15_baify"), ExtResource("16_3m6tb"), ExtResource("17_11fje"), ExtResource("18_oktty"), ExtResource("19_0m2ky"), ExtResource("20_q1wt2"), ExtResource("21_ohhiy"), ExtResource("22_inimr")])
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j0mwa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_duf84"]
 
@@ -6758,13 +6729,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.513796, 0)
 unique_name_in_owner = true
 
 [node name="QodotMap" type="Node3D" parent="Map"]
-script = ExtResource("5_5g7d1")
-map_file = "N:/repos/lidar-abyss/levels/map-01/map-01.map"
-inverse_scale_factor = 40.0
-entity_fgd = SubResource("Resource_g0ve2")
-texture_file_extensions = PackedStringArray("png", "jpg", "jpeg", "bmp")
-unshaded = true
-default_material = SubResource("ShaderMaterial_j0mwa")
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="Map/QodotMap"]
 
