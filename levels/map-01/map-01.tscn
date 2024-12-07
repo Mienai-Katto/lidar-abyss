@@ -6727,6 +6727,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.513796, 0)
 
 [node name="Map" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="QodotMap" type="Node3D" parent="Map"]
 
