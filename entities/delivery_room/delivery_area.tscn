@@ -11,6 +11,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.9973, -5.97686, -109.384)
 size = Vector3(7, 0.1, 18)
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72462, 0)
 script = ExtResource("1_wm4fr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
