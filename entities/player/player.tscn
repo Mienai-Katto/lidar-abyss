@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://blo74ee57pugr" path="res://components/velocity/component.tscn" id="3_2tc5j"]
 [ext_resource type="FontFile" uid="uid://b7inbo8lehncr" path="res://fonts/Code.ttf" id="3_dws7t"]
 [ext_resource type="Texture2D" uid="uid://0egqqdso4okc" path="res://textures/chronium-op.png" id="3_pr1xw"]
-[ext_resource type="PackedScene" uid="uid://b20q22csfyupc" path="res://components/camera/test/component.tscn" id="4_r1bni"]
 [ext_resource type="Shader" path="res://shaders/chromatic.gdshader" id="5_j3c8w"]
+[ext_resource type="PackedScene" uid="uid://bc1hdcrqas08a" path="res://components/camera/test2/component.tscn" id="7_2j42w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e8r0h"]
 shader = ExtResource("5_j3c8w")
@@ -82,7 +82,7 @@ properties/4/replication_mode = 1
 input_ray_pickable = false
 script = ExtResource("1_x62rb")
 velocity_component = NodePath("velocity")
-camera_component = NodePath("ShaderCamera")
+camera_component = NodePath("RefactorCamera")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -210,19 +210,17 @@ label_settings = SubResource("LabelSettings_vwr2e")
 
 [node name="controller" parent="." node_paths=PackedStringArray("velocity", "camera", "body") instance=ExtResource("2_alql2")]
 velocity = NodePath("../velocity")
-camera = NodePath("../ShaderCamera")
+camera = NodePath("../RefactorCamera")
 body = NodePath("..")
 
 [node name="velocity" parent="." instance=ExtResource("3_2tc5j")]
 
+[node name="RefactorCamera" parent="." instance=ExtResource("7_2j42w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+full_sweep_scan_cooldown = 0.5
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_a35x5")
-
-[node name="ShaderCamera" parent="." instance=ExtResource("4_r1bni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-ray_count = 500
-ray_length_sweep = 30.0
-environment_scan_cooldown = 0.8
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

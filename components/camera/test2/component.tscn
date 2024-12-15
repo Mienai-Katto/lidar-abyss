@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://components/camera/test2/manager.gd" id="1_jpdn5"]
 
-[node name="camera" type="Camera3D"]
+[node name="RefactorCamera" type="Camera3D"]
 script = ExtResource("1_jpdn5")
